@@ -12,12 +12,15 @@ import {
 } from "@nextui-org/navbar";
 import { link as linkStyles } from "@nextui-org/theme";
 import { clsx } from "clsx";
+import { useLocation } from "react-router-dom";
+
+import { ThemeSwitch } from "./theme-switch";
 
 import { Logo, SearchIcon } from "@/components/icons";
-import { ThemeSwitch } from "@/components/theme-switch";
 import { siteConfig } from "@/config/site";
 
 export const Navbar = () => {
+  const location = useLocation();
   const searchInput = (
     <Input
       aria-label="Search"
@@ -41,12 +44,21 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar
+      maxWidth="xl"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "#00000014",
+      }}
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
             className="flex justify-start items-center gap-1"
-            color="foreground"
+            color="success"
             href="/"
           >
             <Logo />
@@ -60,10 +72,10 @@ export const Navbar = () => {
             <NavbarItem key={item.href}>
               <Link
                 className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium hover:text-lime-400 font-bold",
+                  linkStyles({ color: "primary" }),
+                  `data-[active=true]:font-medium hover:text-white font-bold ${location.pathname === item.href ? "text-white" : ""} hover:`,
                 )}
-                color="foreground"
+                color="danger"
                 href={item.href}
               >
                 {item.label}
