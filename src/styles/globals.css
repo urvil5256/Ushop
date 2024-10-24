@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#carousel > * {
+  border-radius: 0; /* Set border radius to 0 */
+}
